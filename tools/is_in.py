@@ -22,11 +22,11 @@ def find_nearest(p, df):
     return mi_point, (x1, y1, x2, y2, x3, y3, x4, y4)
 
 def is_inside(point, region):
+    def cross(x_1, y_1, x_2, y_2, xt, yt):
+        return (x2 - x1) * (yt - y_1) - (xt - x_1) * (y_2 - y_1)
     x, y = point
     x1, y1, x2, y2, x3, y3, x4, y4 = region
-    ab = x2 - x1
-    ae = x - x1
-    cd = 
+    return cross(x1, y1, x2, y2, x, y) * cross(x3, y3, x4, y4, x, y) >= 0 and cross(x2, y2, x3, y3, x, y) * cross(x4, y4, x1, y1, x, y) >= 0
 
 
 
