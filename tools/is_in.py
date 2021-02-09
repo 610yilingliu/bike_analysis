@@ -1,12 +1,8 @@
 import pandas as pd
 
-df = pd.read_csv('./cleaned_data/fance_position.csv')
-points = []
+fences = pd.read_csv('./cleaned_data/fance_position.csv')
+bikes = pd.read_csv('./data/gxdc_dd.csv')
 
-for i in range(len(df)):
-    la = df['LATITUDE'][i]
-    lo = df['LONGITUDE'][i]
-    points.append((la, lo))
 
 def find_nearest(p, df):
     min_dis = float('inf')
@@ -23,7 +19,7 @@ def find_nearest(p, df):
 
 def is_inside(point, region):
     def cross(x_1, y_1, x_2, y_2, xt, yt):
-        return (x2 - x1) * (yt - y_1) - (xt - x_1) * (y_2 - y_1)
+        return (x_2 - x_1) * (yt - y_1) - (xt - x_1) * (y_2 - y_1)
     x, y = point
     x1, y1, x2, y2, x3, y3, x4, y4 = region
     return cross(x1, y1, x2, y2, x, y) * cross(x3, y3, x4, y4, x, y) >= 0 and cross(x2, y2, x3, y3, x, y) * cross(x4, y4, x1, y1, x, y) >= 0
