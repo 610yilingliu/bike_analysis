@@ -3,7 +3,7 @@ import json
 import pandas as pd
 
 
-df = pd.read_csv('./cleaned_data/fance_position.csv')
+df = pd.read_csv('./cleaned_data/fence_position.csv')
 
 road_dic = collections.defaultdict(list)
 

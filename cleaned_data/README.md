@@ -1,6 +1,6 @@
 # 数据说明
 
-## fance_position.csv
+## fence_position.csv
 
 FENCE_ID: 停车围栏名
 
