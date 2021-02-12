@@ -1,3 +1,7 @@
 {
-    "python.pythonPath": "/Users/xieling/opt/anaconda3/envs/ds/bin/python"
+    "python.pythonPath": "C:\\Users\\Admin\\Anaconda3\\envs\\multiproc\\python.exe",
+    "python.testing.promptToConfigure": false,
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false
 }
