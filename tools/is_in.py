@@ -65,7 +65,7 @@ def output_func(line_per_proc, proc_id, bikes, fences, proc_num):
             out_bikes['IS_INSIDE'].append(0)
         if proc_id == 0:
             print('row ' + str(i + shift) + ' finished on process ' + str(proc_id))
-    fname = './middleware/' + str(proc_id) + '.csv'
+    fname = './middleware/bike_detail' + str(proc_id) + '.csv'
     out_bikes = pd.DataFrame(out_bikes)
     out_bikes.to_csv(fname, index = False)
 
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     bikes = pd.read_csv('./cleaned_data/required_bike_order.csv')
 
     out_bikes = pd.DataFrame()
-    proc_num = 31
+    proc_num = 11
     line_per_proc = len(bikes)//(proc_num - 1) 
     pool = multiprocessing.Pool(processes = proc_num)
     for i in range(proc_num):
