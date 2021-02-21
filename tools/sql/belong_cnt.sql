@@ -1,0 +1,1 @@
+select FENCE_ID, COUNT(FENCE_ID) as COUNT from (select * from final_data where DISTANCE < 20) as s1 group by FENCE_ID order by COUNT desc
