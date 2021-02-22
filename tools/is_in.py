@@ -7,13 +7,6 @@ from shapely import geometry
 from collections import defaultdict
 from geopy.distance import geodesic
 
-def time_helper(seperator = '_', to_sec = True):
-    """
-    return a string like 2020_09_11_22_43_00 (if to_sec is True) or 2020_09_11_22_43 (if to_sec is False)
-    """
-    if to_sec:
-        return time.strftime("%Y" + seperator + "%m" + seperator + "%d" + seperator + "%H" + seperator + "%M" + seperator + "%S", time.localtime()) 
-    return time.strftime("%Y" + seperator + "%m" + seperator + "%d" + seperator + "%H" + seperator + "%M", time.localtime()) 
 
 def find_nearest(p, df):
     min_dis = float('inf')
