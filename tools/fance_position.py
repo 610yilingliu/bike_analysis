@@ -47,4 +47,4 @@ df['LONGITUDE'] = LONGITUDE
 df['ROAD'] = road
 df = df.drop("FENCE_LOC", axis = 1)
 
-df.to_csv('./cleaned_data/fence_position.csv', index = False)
+df.to_csv('./cleaned_data/fence_position.csv')

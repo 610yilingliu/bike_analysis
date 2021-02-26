@@ -7,6 +7,8 @@ from shapely import geometry
 from collections import defaultdict
 from geopy.distance import geodesic
 
+def e_dist(p1, p2):
+    return (p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[1] - p2[1]) * (p1[1] - p2[1])
 
 def find_nearest(p, df):
     min_dis = float('inf')
@@ -14,12 +16,13 @@ def find_nearest(p, df):
     x1, y1, x2, y2, x3, y3, x4, y4 = None, None, None, None, None, None, None, None
     for i in range(len(df)):
         point = (df['LATITUDE'][i], df['LONGITUDE'][i])
-        curdis = geodesic(p, point).kilometers * 1000
+        curdis = e_dist(point, p)
 
         if curdis < min_dis:
             min_dis = curdis
             mi_point = point
             x1, y1, x2, y2, x3, y3, x4, y4 = df['LATITUDE_0'][i], df['LONGITUDE_0'][i], df['LATITUDE_1'][i], df['LONGITUDE_1'][i], df['LATITUDE_2'][i], df['LONGITUDE_2'][i], df['LATITUDE_3'][i], df['LONGITUDE_3'][i]
+    min_dis = geodesic(p, mi_point).kilometers * 1000
     return mi_point, [(x1, y1), (x2, y2), (x3, y3), (x4, y4)], min_dis
 
 def is_inside(polygon, Points):
@@ -58,16 +61,16 @@ def output_func(line_per_proc, proc_id, bikes, fences, proc_num):
             out_bikes['IS_INSIDE'].append(0)
         if proc_id == 0:
             print('row ' + str(i + shift) + ' finished on process ' + str(proc_id))
-    fname = './middleware/bike_detail' + str(proc_id) + '.csv'
+    fname = './middleware/out_bike_detail' + str(proc_id) + '.csv'
     out_bikes = pd.DataFrame(out_bikes)
     out_bikes.to_csv(fname, index = False)
 
 if __name__ == '__main__':
     if not os.path.exists('./middleware'):
         os.mkdir('./middleware')
-
+    
     fences = pd.read_csv('./cleaned_data/fence_position.csv')
-    bikes = pd.read_csv('./cleaned_data/required_bike_order.csv')
+    bikes = pd.read_csv('./cleaned_data/required_bike_order_out.csv')
 
     out_bikes = pd.DataFrame()
     proc_num = 11
