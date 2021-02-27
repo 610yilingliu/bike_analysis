@@ -28,15 +28,15 @@ sql环境是Microsoft SQL Server
 
 ## get_together.py
 
-简单的合并一下data文件夹中文件
+合并同一个文件夹中文件
 
-**产物：gathered_bike_data.csv**
+**产物：gathered_in_bike_data.csv, gathered_out_bike_data.csv**
 
-## sql/final.sql
+## sql/get_final_bikes.sql
 
-将gathered_bike_data.csv导入到数据库中的table和fence_position.csv导入到数据库中的table做left join，形成最终整理后文件
+将gathered_bike_in_data.csv/ gathered_out_bike_data.csv 导入到数据库中的table和fence_position.csv导入到数据库中的table做left join，形成最终整理后文件
 
-**产物：bike_loc_final.csv**
+**产物：inbikes.csv, outbikes.csv**
 
 ## geo_visualize.ipynb
 
