@@ -8,15 +8,18 @@ import pandas as pd
 
 def point_grids(point):
     """
-    type point: Tuple or List, format: (Latitude, Longitude)
+    :type point: Tuple or List, format: (Latitude, Longitude)
+    :rtype: List, related geohash grids to current point
     """
     center = geohash.encode(point[0], point[1], 7)
+    # 将center扩展为九宫格,避免"错误最近点"现象出现
     nears = geohash.expand(center)
     return [center] + nears
 
 def fence_grids(points):
     """
-    type points: List[(Float, Float)], with 4 tuples: p1, p2, p3, p4: position or 4 corner points of a polygon(fence)
+    :type points: List[(Float, Float)], with 4 tuples: p1, p2, p3, p4: position or 4 corner points of a polygon(fence)
+    :rtype: List, related geohash grids to current bike fence.
     """
     p1, p2, p3, p4 = points
     p1_g, p2_g, p3_g, p4_g = point_grids(p1), point_grids(p2), point_grids(p3), point_grids(p4)

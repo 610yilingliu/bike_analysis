@@ -40,7 +40,7 @@ bikes.head()
 
 # %%
 cleaned_df = pd.DataFrame(columns = bikes.columns)
-cleaned_df.loc[0] = bikes.iloc[0]
+cleaned_df.loc[0] = bikes.loc[0]
 
 
 # %%
@@ -52,8 +52,8 @@ if bikes['LOCK_STATUS'][0] == 0:
     slow += 1
 else:
     tmp_row = bikes.iloc[0]
-# 对于连续的开锁数据,保留第一个(0)
-# 对于连续的关锁数据,保留最后一个(1)
+# 对于连续的开锁数据(0),保留第一个
+# 对于连续的关锁数据(1),保留最后一个
 fast = 1
 slow = 0
 tmp_row = None
@@ -62,59 +62,57 @@ if bikes['LOCK_STATUS'][0] == 0:
     slow += 1
 else:
     tmp_row = bikes.iloc[0]
-# 对于连续的开锁数据,保留第一个(0)
-# 对于连续的关锁数据,保留最后一个(1)
 while fast < len(bikes):
     print(fast, slow)
-    if bikes['BICYCLE_ID'][fast] != bikes['BICYCLE_ID'][fast - 1]:
+    if bikes['BICYCLE_ID'].iloc[fast] != bikes['BICYCLE_ID'].iloc[fast - 1]:
         if tmp_row is not None:
             cleaned_df.loc[slow] = tmp_row
             slow += 1
             tmp_row = None
-        if bikes['LOCK_STATUS'][fast] == 1:
-            tmp_row = bikes.loc[fast]
+        if bikes['LOCK_STATUS'].iloc[fast] == 1:
+            tmp_row = bikes.iloc[fast]
             fast += 1
         else:
-            cleaned_df.loc[slow] = bikes.loc[fast]
+            cleaned_df.loc[slow] = bikes.iloc[fast]
             print(fast, slow)
             slow += 1
             fast += 1
     else:
         # 间隔如果大于一天.这里是乱填的一个可用数字
-        if bikes['MKTIME'][fast] - bikes['MKTIME'][fast - 1] > 20000:
+        if bikes['MKTIME'].iloc[fast] - bikes['MKTIME'].iloc[fast - 1] > 20000:
             if tmp_row is not None:
                 cleaned_df.loc[slow] = tmp_row
                 slow += 1
                 tmp_row = None
-            if bikes['LOCK_STATUS'][fast] == 1:
+            if bikes['LOCK_STATUS'].iloc[fast] == 1:
                 tmp_row = bikes.loc[fast]
                 fast += 1
             else:
-                cleaned_df.loc[slow] = bikes.loc[fast]
+                cleaned_df.loc[slow] = bikes.iloc[fast]
                 print(fast, slow)
                 slow += 1
                 fast += 1
         # 间隔如果小于一天,那么判断是否为异常数据.
         else:
-            if bikes['LOCK_STATUS'][fast] == 0:
+            if bikes['LOCK_STATUS'].iloc[fast] == 0:
                 # 不异常时的开锁:如果temp中存了关锁,把temp中的关锁放出来加入到新的df,把当前的开锁也加入新的df
-                if bikes['LOCK_STATUS'][fast - 1] == 1:
+                if bikes['LOCK_STATUS'].iloc[fast - 1] == 1:
                     cleaned_df.loc[slow] = tmp_row
                     slow += 1
                     tmp_row = None
-                    cleaned_df.loc[slow] = bikes.loc[fast]
+                    cleaned_df.loc[slow] = bikes.iloc[fast]
                     fast += 1
                     slow += 1
                 # 异常值, 跳过
                 else:
                     fast += 1
             else:# if bikes['LOCK_STATUS'][fast] == 1, 开锁.无论如何直接关进tmp_row
-                tmp_row= bikes.loc[fast]
+                tmp_row= bikes.iloc[fast]
                 fast += 1
 if tmp_row is not None:
     cleaned_df.loc[slow] = tmp_row
 
-cleaned_df.to_csv('./cleaned_data/removed_abnormal.csv')
+cleaned_df.to_csv('./cleaned_data/removed_abnormal.csv', index = False)
 # %%
 
 

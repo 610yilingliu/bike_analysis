@@ -116,19 +116,23 @@
 # names[m].append(emp)
 # print(names)
 
-from shapely.geometry import Point
-from shapely.geometry.polygon import Polygon
-from shapely.ops import nearest_points
-from geopy.distance import geodesic
+# from shapely.geometry import Point
+# from shapely.geometry.polygon import Polygon
+# from shapely.ops import nearest_points
+# from geopy.distance import geodesic
 
-polygon_data = [[24.527338,118.103198], [24.527373, 118.103224],[24.527366, 118.103236],[24.527331, 118.103209],[24.527338, 118.103198]]
+# polygon_data = [[24.527338,118.103198], [24.527373, 118.103224],[24.527366, 118.103236],[24.527331, 118.103209],[24.527338, 118.103198]]
 
-# polygon_data = [[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]]
-point_data = [24.527352,118.10321675]
-# point_data = [0.5, 5]
-polygon = Polygon(polygon_data)
-point = Point(point_data)
-boundary_obj = nearest_points(polygon, point)[0]
-nearest_point = boundary_obj.bounds[:2]
-dist = geodesic(point_data, nearest_point).meters
-print(dist)
+# # polygon_data = [[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]]
+# point_data = [24.527352,118.10321675]
+# # point_data = [0.5, 5]
+# polygon = Polygon(polygon_data)
+# point = Point(point_data)
+# boundary_obj = nearest_points(polygon, point)[0]
+# nearest_point = boundary_obj.bounds[:2]
+# dist = geodesic(point_data, nearest_point).meters
+# print(dist)
+
+import pandas
+a = pandas.DataFrame()
+print(a)

@@ -82,10 +82,10 @@ def nearest_fence(bike_info, grid_fence, fence_path, bike_path, target_path):
     bike_detail.to_csv(target_path)
 
 if __name__ == '__main__':
-    jspath = "./cleaned_data/fence_grids.json"
+    jspath = "./cleaned_data/middlewares/fence_grids.json"
     grid_fence = grid_dict(jspath)
-    bike_path = './cleaned_data/hashed_bikes.csv'
+    bike_path = './cleaned_data/middlewares/hashed_bikes.csv'
     bike_info = load_bikes(bike_path)
     fence_path = './cleaned_data/fence_position.csv'
-    target_path = './cleaned_data/bike_detail.csv'
+    target_path = './cleaned_data/middlewares/bike_detail.csv'
     nearest_fence(bike_info, grid_fence, fence_path, bike_path, target_path)
