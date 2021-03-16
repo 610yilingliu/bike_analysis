@@ -8,7 +8,7 @@ pd.set_option('display.float_format',lambda x : '%.2f' % x)
 
 
 # %%
-bikes = pd.read_csv('./cleaned_data/bikes_7-9.csv')
+bikes = pd.read_csv('./cleaned_data/middlewares/bikes_7-9.csv')
 
 
 # %%
@@ -112,7 +112,7 @@ while fast < len(bikes):
 if tmp_row is not None:
     cleaned_df.loc[slow] = tmp_row
 
-cleaned_df.to_csv('./cleaned_data/removed_abnormal.csv', index = False)
+cleaned_df.to_csv('./cleaned_data/middlewares/removed_abnormal.csv', index = False)
 # %%
 
 

@@ -27,9 +27,9 @@ def fence_grids(points):
 
 def export_fence_grids(df, fname):
     """
-    df: pandas DataFrame from fence_position.csv
-    fname: String, name of binary file
-    export: binary file
+    :df: pandas DataFrame from fence_position.csv
+    :fname: String, name of binary file
+    :export: json file
     """
     json_dic = dict()
     for i in range(len(df)):
@@ -49,6 +49,11 @@ def export_fence_grids(df, fname):
     f.close()
 
 def hash_bikes(bike_data, outpath):
+    """
+    :type bike_data: String, path contains gxdc_dd.csv
+    :type output: String, export path
+    :export: csv file
+    """
     df = pd.read_csv(bike_data)
     bike_grid = []
     bike_name = []
@@ -66,6 +71,6 @@ def hash_bikes(bike_data, outpath):
 
 if __name__ == '__main__':
     df = pd.read_csv('./cleaned_data/fence_position.csv')
-    export_fence_grids(df, 'fence_grids.json')
-    hash_bikes('./data/gxdc_dd.csv', './cleaned_data/hashed_bikes.csv')
+    export_fence_grids(df, './cleaned_data/middlewares/fence_grids.json')
+    hash_bikes('./data/gxdc_dd.csv', './cleaned_data/middlewares/hashed_bikes.csv')
 

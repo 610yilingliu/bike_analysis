@@ -8,7 +8,8 @@ from geopy.distance import geodesic
 
 def grid_dict(jsonpath):
     """
-    type jsonpath: String, the path where stores fenceID and its grids
+    :type jsonpath: String, the path where stores fenceID and its grids
+    :rtype: dict, dict{grid:(fence1, fence2...)}
     """
     f=open(jsonpath,"r")
     content=f.readline()
@@ -21,6 +22,10 @@ def grid_dict(jsonpath):
     return grid_fence
 
 def load_bikes(fpath):
+    """
+    :type fpath: path of hashed_bikes.csv
+    :rtype: info, dict{bike_id: (belong_grid, (latitude, longitude))}
+    """
     df = pd.read_csv(fpath)
     info = dict()
     for i in range(len(df)):
@@ -32,11 +37,23 @@ def load_bikes(fpath):
     return info
 
 def comp_distance(p1, p2):
+    """
+    :type p1, p2: tuple, point on the map
+    :rtype float, square of distance between p1 and p2
+    """
     x1, y1 = p1
     x2, y2 = p2
     return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)
 
 def nearest_fence(bike_info, grid_fence, fence_path, bike_path, target_path):
+    """
+    :type bike_info: dict from function load_bikes
+    :type grid_fence: dict from function grid_dict
+    :type fence_path: String, path of fences_position.csv
+    :type bike_path: String, path of hashed_bikes.csv
+    :type target_path: String, path to export csv file
+    :export: csv file
+    """
     bike_detail = pd.read_csv(bike_path)
     fence_detail = pd.read_csv(fence_path)
     bike_fence = dict()
