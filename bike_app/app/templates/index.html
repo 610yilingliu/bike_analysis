@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>共享单车引导实现</title>
+    <style>
+
+    html, body {
+        height: 100%;
+        min-width: 100%;
+        margin:0px;
+        padding:0px;
+        overflow-x: hidden;
+    }
+
+    .form_submit {
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        /* -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%); */
+        text-align: center;
+    }
+    .topmar{
+        margin-top: 20px;
+    }
+    .button1 {
+        background-color: gray;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        }
+
+    </style>
+    {% block css%}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap-theme.min.css')}}">
+    {% endblock %}
+    {% block js %}
+    <script src="{{url_for('static',filename='js/jquery_3.31.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    {% endblock %}
+</head>
+<body>
+        {% for message in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{ message[0] }}" id="flash_msg">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message[1] }}
+        </div>
+        <script>
+                setTimeout(function() {
+                $('#flash_msg').fadeOut('slow');
+            }, 1500);
+        </script>
+    {% endfor %}
+    
+
+
+
+	<iframe   src={{m}} width=800 height=800   frameborder="1"  name="导航结果"     scrolling="auto">   </iframe>
+
+	
+	
+	<div class = "form_submit">
+		<form method="POST" action="">
+			当前纬度:
+			<input type="text" name="la" value={{request.form.la}}>
+			当前经度:
+			<input type="text" name="lo" value={{request.form.lo}}>
+			最大行走距离(0米以上):
+			<input type="text" name="mx_dist" value={{request.form.max_dist}}>
+
+			<div class="topmar">
+				<input type="submit" value="调度" class="button1"> 
+			</div>
+		</form>
+		<div>{{ table|safe }}</div>
+        <br>
+        <div>即将导航前往共享单车围栏{{ fence_name }}, 该围栏单车流量为{{flow}}, 流量密度为{{density}}, 距离当前位置{{dist}}米</div>
+	<div>
+
+</body>
+</html>
