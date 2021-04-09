@@ -49,10 +49,8 @@ Python 3.7
 
 **任务一解决方案主文件**
 
-### `tools/suggestions.ipynb`
-
-**任务二调度方案示例(使用地理距离, 因无法获得图数据所以暂不采用最短路算法)**
-
+### bike_app
+基于flask的调度算法DEMO,请参阅其中readme.md进行安装
 
 
 ## `./data`
