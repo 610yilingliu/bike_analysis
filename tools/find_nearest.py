@@ -79,7 +79,7 @@ def nearest_fence(bike_info, grid_fence, fence_path, bike_path, target_path):
     related_fence = [-1] * len(bike_detail)
     distance = [-1] * len(bike_detail)
     for bike in bike_fence:
-        print("Counting Distance For Bike " + bike)
+        print("Counting Distance For Bike " + str(bike))
         bike_index = int(bike)
         fence = bike_fence[bike]
         if fence == -1:
@@ -96,7 +96,7 @@ def nearest_fence(bike_info, grid_fence, fence_path, bike_path, target_path):
         distance[bike_index] = dist
     bike_detail['NEAREST_FENCE'] = related_fence
     bike_detail['DISTANCE'] = distance
-    bike_detail.to_csv(target_path)
+    bike_detail.to_csv(target_path, index = False)
 
 if __name__ == '__main__':
     jspath = "./cleaned_data/middlewares/fence_grids.json"
@@ -104,5 +104,5 @@ if __name__ == '__main__':
     bike_path = './cleaned_data/middlewares/hashed_bikes.csv'
     bike_info = load_bikes(bike_path)
     fence_path = './cleaned_data/fence_position.csv'
-    target_path = './cleaned_data/middlewares/bike_detail.csv'
+    target_path = './cleaned_data/bikes_data.csv'
     nearest_fence(bike_info, grid_fence, fence_path, bike_path, target_path)

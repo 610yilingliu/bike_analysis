@@ -1,1 +1,0 @@
-select datepart(dd, UPDATE_TIME) as DAY, * from removed_abnormal order by NEAREST_FENCE, UPDATE_TIME

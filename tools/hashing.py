@@ -71,6 +71,6 @@ def hash_bikes(bike_data, outpath):
 
 if __name__ == '__main__':
     df = pd.read_csv('./cleaned_data/fence_position.csv')
-    export_fence_grids(df, './cleaned_data/middlewares/fence_grids.json')
-    hash_bikes('./data/gxdc_dd.csv', './cleaned_data/middlewares/hashed_bikes.csv')
+    export_fence_grids(df, 'fence_grids.json')
+    hash_bikes('./cleaned_data/middlewares/removed_abnormal.csv', './cleaned_data/middlewares/hashed_bikes.csv')
 
