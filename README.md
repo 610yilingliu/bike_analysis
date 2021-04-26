@@ -2,6 +2,8 @@
 
 ![](./pic.png)
 
+结果: https://data.xm.gov.cn/contest-series/digit-china-2021/#/3/awards_list
+
 # 2021-04-23更新:
 
 改为全python处理,增加preview.ipynb,逻辑更为清晰.并且将原始的看起来很恶心的python原生方式(我自己看了都觉得恶心那种)改为使用pandas去除异常数据,代码效率更高(pandas底层使用numpy,内置了多线程)
